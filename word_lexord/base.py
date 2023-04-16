@@ -26,6 +26,14 @@ def decimal_to_33(num: int) -> List[int]:
 
 
 def decimal_to_base(num: int, base: int) -> List[int]:
+    """
+    Перевод числа num из десятичной системы счисления в систему
+      по основанию base без нулей
+      (== со значащими нулями, где цифры увеличены на 1)
+    """
+    if base == 1:
+        return [0] * (num + 1)
+
     if num == 0:
         return [1]
     res = []
@@ -65,6 +73,9 @@ def get_word_number(
     """
     Получить порядковый номер слова word в алфавите alphabet.
     """
+    if not word.replace(" ", ""):
+        return 0
+
     letter_ord = dict()
     for index, letter in enumerate(alphabet):
         letter_ord[letter] = index + 1
@@ -83,14 +94,18 @@ def get_word_by_number(
     """
     Получить слово под номером num в алфавите alphabet.
     """
+    if num < 1:
+        return " "
+    num -= 1
     num_array = decimal_to_base(num, len(alphabet))
     return convert_nums_to_letters(num_array, alphabet)
 
 
 def get_words_numbers_in_sentence(sentence: str, alphabet: str) -> List[int]:
     """
-    Возвращает последовательность номеров слов в предложении.
-    Предложение должно быть грамотно составлено (пробелы после знаков преп.)
+    Получить последовательность номеров слов в предложении.
+    Предложение должно быть либо без знаков препинания, либо без
+      символов, которых нет в алфавите.
     """
     sentence = "".join(x for x in sentence if x in alphabet + " ")
     sentence = sentence.split()
@@ -100,7 +115,19 @@ def get_words_numbers_in_sentence(sentence: str, alphabet: str) -> List[int]:
     return ans
 
 
+def nums_to_words(nums: List[int], alphabet: str) -> List[str]:
+    """
+    Перевод порядковых номеров слов nums в последовательность
+      слов алфавита alphabet
+    """
+    ans = [get_word_by_number(num, alphabet) for num in nums]
+    return ans
+
+
 def infinite_generation(alphabet: str):
+    """
+    Бесконечная генерация слов в лексикографическом порядке.
+    """
     i = 0
     while True:
         num_array = decimal_to_base(i, len(alphabet))
@@ -111,7 +138,8 @@ def infinite_generation(alphabet: str):
 
 
 def main():
-    print("1 - rus; 2 - eng")
+    # FIXME
+    print("1 - rus; 2 - eng; 3 - custom")
     a = input()
     if a == "1":
         alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
@@ -119,20 +147,27 @@ def main():
     elif a == "2":
         alphabet = "abcdefghijklmnopqrstuvwxyz"
         print("eng")
+    elif a == "3":
+        print("enter your alphabet without spaces")
+        alphabet = input()
+        print("your alphabet: ", alphabet)
     else:
         alphabet = "12345"
         print("nums")
 
-    print("1 - infgen; 2 - getwordnum; 3 - getwordbynum; 4 - sentence_to_nums")
+    print("1 - infgen; 2 - getwordnum; 3 - getwordbynum; " +
+          "4 - sentence_to_nums; 5 - nums_to_sentence")
     option = input()
     if option == "1":
         infinite_generation(alphabet)
     if option == "2":
         print(get_word_number(input(), alphabet))
     if option == "3":
-        print(get_word_by_number(int(input()) - 1, alphabet))
+        print(get_word_by_number(int(input()), alphabet))
     if option == "4":
         print(*get_words_numbers_in_sentence(input(), alphabet))
+    if option == "5":
+        print(*nums_to_words(map(int, input().split()), alphabet))
 
 
 if __name__ == "__main__":
