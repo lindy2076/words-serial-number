@@ -4,6 +4,7 @@ from time import sleep
 
 def decimal_to_33(num: int) -> List[int]:
     """
+    (unsued base)
     Перевод из десятичной системы счисления в 33-ричную со значащими нулями.
     """
     if num == 0:
@@ -124,9 +125,27 @@ def nums_to_words(nums: List[int], alphabet: str) -> List[str]:
     return ans
 
 
+def words_range(alphabet: str, *args: List[int]) -> str:
+    """
+    Получить генератор слов алфавита alphabet.
+    Если передано одно число n в args, то будут выданы
+      первые n слов (включая пустое).
+    Если передано два числа n1, n2 в args, то будут выданы
+      слова с n1 по n2 номер.
+    Если передано три числа n1, n2, n3 в args, то будет выдано
+      каждое n3-ее слово с n1 по n2 номер.
+    Возвращает пустую строку, если передан только алфавит.
+    """
+    if len(args) == 0:
+        yield ""
+    for wnum in range(*args):
+        yield get_word_by_number(wnum, alphabet)
+
+
 def infinite_generation(alphabet: str):
     """
-    Бесконечная генерация слов в лексикографическом порядке.
+    Бесконечный вывод слов, упорядоченных сначала
+      по длине, а затем лексикографически.
     """
     i = 0
     while True:
@@ -135,40 +154,3 @@ def infinite_generation(alphabet: str):
         print(i + 1, word, get_word_number(word, alphabet))
         i += 1
         sleep(0.01)
-
-
-def main():
-    # FIXME
-    print("1 - rus; 2 - eng; 3 - custom")
-    a = input()
-    if a == "1":
-        alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
-        print("rus")
-    elif a == "2":
-        alphabet = "abcdefghijklmnopqrstuvwxyz"
-        print("eng")
-    elif a == "3":
-        print("enter your alphabet without spaces")
-        alphabet = input()
-        print("your alphabet: ", alphabet)
-    else:
-        alphabet = "12345"
-        print("nums")
-
-    print("1 - infgen; 2 - getwordnum; 3 - getwordbynum; " +
-          "4 - sentence_to_nums; 5 - nums_to_sentence")
-    option = input()
-    if option == "1":
-        infinite_generation(alphabet)
-    if option == "2":
-        print(get_word_number(input(), alphabet))
-    if option == "3":
-        print(get_word_by_number(int(input()), alphabet))
-    if option == "4":
-        print(*get_words_numbers_in_sentence(input(), alphabet))
-    if option == "5":
-        print(*nums_to_words(map(int, input().split()), alphabet))
-
-
-if __name__ == "__main__":
-    main()
