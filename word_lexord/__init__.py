@@ -3,7 +3,11 @@ from .base import (
     convert_nums_to_letters,
     get_word_number,
     get_word_by_number,
-    get_words_numbers_in_sentence
+    get_words_numbers_in_sentence,
+    words_range
+)
+from .lang import (
+    ALPHABETS
 )
 
 
@@ -12,5 +16,7 @@ __all__ = [
     "convert_nums_to_letters",
     "get_word_number",
     "get_word_by_number",
-    "get_words_numbers_in_sentence"
+    "get_words_numbers_in_sentence",
+    "words_range",
+    "ALPHABETS"
 ]
