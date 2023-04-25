@@ -1,0 +1,3 @@
+# Security Policy
+
+well, this package doesn't require any security policy i guess...
