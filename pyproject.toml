@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wordlexord"
+version = "0.0.1"
+authors = [
+  { name="Aleksej Kosolapov", email="kakaporuqee@gmail.com" },
+]
+description = "This is a python package for having fun with words ordered by length and then lexicographically"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Unix",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/lindy2076/words-serial-number"
+"Bug Tracker" = "https://github.com/lindy2076/words-serial-number/issues"
