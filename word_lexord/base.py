@@ -142,7 +142,7 @@ def words_range(alphabet: str, *args: List[int]) -> str:
         yield get_word_by_number(wnum, alphabet)
 
 
-def infinite_generation(alphabet: str):
+def infinite_generation(alphabet: str) -> None:
     """
     Бесконечный вывод слов, упорядоченных сначала
       по длине, а затем лексикографически.
