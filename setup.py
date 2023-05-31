@@ -8,7 +8,7 @@ with open('HISTORY.md') as history_file:
 
 setup_args = dict(
     name='wordlexord',
-    version='0.0.1',
+    version='0.0.2',
     description='This is a python package for having fun with words ordered by length and then lexicographically',
     long_description_content_type="text/markdown",
     long_description=README + '\n\n' + HISTORY,
