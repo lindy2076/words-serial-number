@@ -4,7 +4,8 @@ from .base import (
     get_word_number,
     get_word_by_number,
     get_words_numbers_in_sentence,
-    words_range
+    words_range,
+    nums_to_words
 )
 from .lang import (
     ALPHABETS
@@ -18,5 +19,6 @@ __all__ = [
     "get_word_by_number",
     "get_words_numbers_in_sentence",
     "words_range",
+    "nums_to_words"
     "ALPHABETS"
 ]
